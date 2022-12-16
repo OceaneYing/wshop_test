@@ -5,7 +5,7 @@ use FwTest\Classes as Classes;
 class AjaxController extends AbstractController
 {
     /**
-     * @Route('/ajax_delete_product.php')
+     * @Route('/ajax_delete_product')
      */
     public function deleteProduct()
     {

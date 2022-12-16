@@ -5,20 +5,21 @@ use FwTest\Classes as Classes;
 class ProductController extends AbstractController
 {
     /**
-     * @Route('/product_list.php')
+     * @Route('/product_list')
      */
     public function index()
     {
     	$db = $this->getDatabaseConnection();
 
-        $list_product = Classes\Product::getAll($db, 0, $this->array_constant['product']['nb_products']);
-
+        // oying : changement du nom de la fonction
+        $list_product = Classes\Product::getList($db, 0, $this->array_constant['product']['nb_products']);
+        
         echo $this->render('product/list.tpl', ['list_product' => $list_product]);
 
     }
 
     /**
-     * @Route('/product_detail.php')
+     * @Route('/product_detail')
      */
     public function detail()
     {
@@ -27,11 +28,12 @@ class ProductController extends AbstractController
     	$id = (isset($_GET['id']) && !empty($_GET['id']))? $_GET['id']:0;
 
     	if (!empty($id)) {
+            // oying : récupérer la list de produit avec un filtre sur l'id
+    		$products = Classes\Product::getList($db, 0, $this->array_constant['product']['nb_products'], "produit_id=$id");
 
-    		$product = new Classes\Product($db, $id);
-
-    		if (!empty($product)) {
-    			echo $this->render('product/detail_list.tpl', ['product' => $product]);
+    		if (!empty($products)) {
+                // oying : correction du nom du fichier
+    			echo $this->render('product/detail.tpl', ['product' => $products[0]]);
     		} else {
     			$this->_redirect('product_list.php');
     		}

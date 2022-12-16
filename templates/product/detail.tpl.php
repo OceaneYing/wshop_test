@@ -38,22 +38,27 @@ $product = $this->product;
         <div class="card mt-4">
           <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
           <div class="card-body">
-            <h3 class="card-title"><?php echo $product->produit_titreobjet; ?></h3>
+            <!-- oying : $produit est un array maintenant -->
+            <h3 class="card-title"><?php echo $product['produit_titreobjet']; ?></h3>
             <h4>
               <?php
-              if ($product->produit_prixremise>0 && $product->produit_prixremise<$product->produit_vente) {
+              // $produit est un array
+              if ($product['produit_prixremise']>0 && $product['produit_prixremise']<$product['produit_vente']) {
               ?>
-                <span><?php echo $product->produit_prixremise ?> &euro;</span>
-                <span><strike><?php echo $product->produit_prixvente ?> &euro;</strike></span>
+                <!-- oying : $produit est un array -->
+                <span><?php echo $product['produit_prixremise'] ?> &euro;</span>
+                <span><strike><?php echo $product['produit_prixvente'] ?> &euro;</strike></span>
               <?php
               } else {
               ?>
-                <span><?php echo $product->produit_prixvente ?> &euro;</span>
+                <!-- oying : $produit est un array -->
+                <span><?php echo $product['produit_prixvente'] ?> &euro;</span>
               <?php
               }
               ?>
              </h4>
-            <p class="card-text"><?php echo $product->produit_description; ?></p>
+            <!-- oying : $produit est un array -->
+            <p class="card-text"><?php echo $product['produit_description']; ?></p>
           </div>
         </div>
         <!-- /.card -->

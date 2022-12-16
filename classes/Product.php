@@ -1,7 +1,8 @@
 <?php
 namespace FwTest\Classes;
 
-class ProductAction
+// oying : ProduitAction => Produit, le nom de la class doit être cohérent avec le nom du fichier
+class Product
 {
     /**
      * The table name
@@ -83,9 +84,11 @@ class ProductAction
      *
      * @return     array of Product
      */
-	public static function getAll($db, $begin = 0, $end = 15)
+    // oying : changer le nom de la fonction suite à l'ajout du filtre
+	public static function getList($db, $begin = 0, $end = 15, $filter = "")
 	{
-		$sql_get = "SELECT p.* FROM " . self::$table_name . " LIMIT " . $begin. ", " . $end;
+        // oying : ajouter le filtre si non vide
+		$sql_get = "SELECT * FROM " . self::$table_name . (!empty($filter) ? " WHERE $filter" : "") . " LIMIT " . $begin. ", " . $end;
 
 		$result = $db->fetchAll($sql_get);
 
@@ -93,7 +96,9 @@ class ProductAction
 
 		if (!empty($result)) {
 			foreach ($result as $product) {
-				$array_product[] = new Product($db, $product);
+                $productData = new Product($db, $product);
+                // oying : retourner les informations du produit en array
+				$array_product[] = $productData->_array_datas;
 			}
 		}
 
@@ -111,16 +116,6 @@ class ProductAction
 		$sql_delete = "DELETE FROM " . self::$table_name . " WHERE " . self::$pk_name . " = ?";
 
 		return $this->db->query($sql_delete, $id);
-	}
-
-    /**
-     * Get the primary key
-     *
-     * @return     int
-     */
-	public function getId()
-	{
-		return $this->_array_datas[self::$pk_name];
 	}
 
     /**

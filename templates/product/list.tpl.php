@@ -38,20 +38,24 @@ $list_product = $this->list_product;
     <!-- Page Features -->
     <div class="row text-center">
 
-      	<?php foreach ($list_product as $product) { 
+      	<?php foreach ($list_product as $product) {
 
       		?>
       		<div class="col-lg-3 col-md-6 mb-4 bloc_product">
 		        <div class="card h-100">
 		          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
 		          <div class="card-body">
-		            <h4 class="card-title"><?php echo $product->produit_label; // Titre objet ?></h4>
-		            <p class="card-text"><?php echo $product->produit_nom; ?></p>
+                <!-- oying : $produit est un array -->
+		            <h4 class="card-title"><?php echo $product['produit_nom']; // Titre objet ?></h4>
+                <!-- oying : $produit est un array -->
+		            <p class="card-text"><?php echo $product['produit_ref']; ?></p>
 		          </div>
 		          <div class="card-footer">
-		            <a href="product_detail.php?id=<?php echo $product->getId(); ?>" class="btn btn-primary">Voir le produit</a>
+                <!-- oying : $produit est un array -->
+		            <a href="product_detail?id=<?php echo $product['produit_id']; ?>" class="btn btn-primary">Voir le produit</a>
 		          </div>
-		          <button data-id="<?php echo $product->getId(); ?>" type="button" class="close" aria-label="Close">
+              <!-- oying : $produit est un array -->
+		          <button data-id="<?php echo $product['produit_id']; ?>" type="button" class="close" aria-label="Close">
     					  <span aria-hidden="true">&times;</span>
     					</button>
 		        </div>
