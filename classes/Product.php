@@ -85,10 +85,13 @@ class Product
      * @return     array of Product
      */
     // oying : changer le nom de la fonction suite à l'ajout du filtre
-	public static function getList($db, $begin = 0, $end = 15, $filter = "")
+	public static function getList($db, $begin = 0, $end = 0, $filter = "")
 	{
-        // oying : ajouter le filtre si non vide
-		$sql_get = "SELECT * FROM " . self::$table_name . (!empty($filter) ? " WHERE $filter" : "") . " LIMIT " . $begin. ", " . $end;
+		$sql_get = "SELECT * FROM " . self::$table_name
+            // oying : ajouter le filtre si non vide
+            . (!empty($filter) ? " WHERE $filter" : "")
+            // ajout de limit si $end non égale à 0
+            . ($end === 0 ? "": " LIMIT " . $begin. ", " . $end);
 
 		$result = $db->fetchAll($sql_get);
 

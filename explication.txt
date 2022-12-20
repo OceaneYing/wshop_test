@@ -1,0 +1,25 @@
+* URL de base en localhost
+  - urlBase = http://localhost:8888/wshop-test/public
+* Afficher tous les magasins
+  - URL : {{urlBase}}/api/shop/list?type=all
+  - methode : GET
+* Afficher la liste des magasins filtrée avec le titre du magasin
+  - URL : {{urlBase}}/api/shop/list?type=title&value=amazon
+  - methode : GET
+* Afficher la liste des magasins filtrée avec la ref du magasin
+  - URL : {{urlBase}}/api/shop/list?type=ref&value=ref_1
+  - methode : GET
+* Afficher la liste des magasins filtrée avec la ville du magasin
+  - URL : {{urlBase}}/api/shop/list?type=city&value=toulous
+  - methode : GET
+* Création d'un nouveau magasin
+  - URL : {{urlBase}}/api/shop
+  - methode : POST
+  - Données attendues : shop_ref, shop_title, shop_city
+* Suppression d'un magasin
+  - URL : {{urlBase}}/api/shop?id=12
+  - methode : DELETE
+* Mettre à jour d'un magasin
+- URL : {{urlBase}}/api/shop
+- methode : POST
+- Données attendues : shop_id, shop_ref, shop_title, shop_city
